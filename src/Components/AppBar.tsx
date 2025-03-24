@@ -1,7 +1,8 @@
-import { AppBar, Box, IconButton, Menu, MenuItem } from '@mui/material'
+import { AppBar, Box, IconButton, Menu, MenuItem, Paper } from '@mui/material'
 import React, { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
 import logoImage from "../assets/images/Ekasoft4kMalli.png"
+import M05 from "../assets/images/M05.jpg"
 
 function MenuAppBar() {
     const [menuIsOpen, setMenuIsOpen] = useState<boolean>(() => {return false})
@@ -27,16 +28,20 @@ function MenuAppBar() {
                         justifyContent: "space-between",
                         flexDirection: "column",
                         bgcolor: "black",
-                        overflow: "clip",
                     }}
                 >
                     {/* Ekasoft logo image */}
-                    <Box
+                    <Paper
                         sx={{
+                            zIndex:1500,
+                            overflow: "clip",
                             display: "flex",
                             justifyContent:"space-around",
+                            bgcolor:"inherit",
                             width: 1,
-                            m:0,
+                            m: 0,
+                            borderBottom: 1,
+                            borderColor: "gray"
                         }}
                     >
                         <Box
@@ -50,16 +55,27 @@ function MenuAppBar() {
                                 my: {lg: -3.5, md: -2.5, xs: -1.5},
                             }}
                         />
-                    </Box>
+                    </Paper>
 
                     {/* menu Box */}
-                    <Box>
+                    <Box
+                        sx={{
+                            zIndex:1000,
+                            mt:-1,
+                            width: 1,
+                            backgroundImage: `url(${M05})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            borderBottom: 0.2,
+                            borderColor: "gray"
+                        }}
+                    >
                         {/* Button to open navigation menu */}
                         <IconButton
                             onClick={openMenu}
                             sx={{
-                                ml: 1,
-                                mr: "auto"
+                                pt: 1.5,
+                                pb: 0.5
                             }}
                         >
                             <MenuIcon 
@@ -72,6 +88,18 @@ function MenuAppBar() {
                             open={menuIsOpen}
                             onClose={closeMenu}
                             anchorEl={menuAnchorEl}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "center",
+                            }}
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "center",
+                            }}
+                            sx={{
+                                display:"flex",
+                                justifyContent:"space-around"
+                            }}
                         >
                             <MenuItem>good</MenuItem>
                             <MenuItem>stuff</MenuItem>
