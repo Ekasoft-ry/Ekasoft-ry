@@ -1,4 +1,4 @@
-import { AppBar, Box, IconButton, Menu, MenuItem, Paper } from '@mui/material'
+import { AppBar, Box, IconButton, Menu, MenuItem, Paper, useMediaQuery, useTheme } from '@mui/material'
 import React, { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
 import logoImage from "../assets/images/Ekasoft4kMalli.png"
@@ -7,6 +7,8 @@ import M05 from "../assets/images/M05.jpg"
 function MenuAppBar() {
     const [menuIsOpen, setMenuIsOpen] = useState<boolean>(() => {return false})
     const [menuAnchorEl, setMenuAnchorEl] = useState<HTMLElement | null>(() => {return null})
+    const theme = useTheme()
+    const isSmallDisplay = useMediaQuery(theme.breakpoints.down("sm"))
 
 
     const openMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -67,43 +69,53 @@ function MenuAppBar() {
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             borderBottom: 0.2,
-                            borderColor: "gray"
+                            borderColor: "gray",
                         }}
                     >
-                        {/* Button to open navigation menu */}
-                        <IconButton
-                            onClick={openMenu}
-                            sx={{
-                                pt: 1.5,
-                                pb: 0.5
-                            }}
-                        >
-                            <MenuIcon 
-                            sx={{color: "whitesmoke"}}
-                            />
-                        </IconButton>
+                        {isSmallDisplay ? (
+                            <>
+                                {/* Button to open navigation menu */}
+                                <IconButton
+                                    onClick={openMenu}
+                                    sx={{
+                                        pt: 1.5,
+                                        pb: 0.5
+                                    }}
+                                >
+                                    <MenuIcon 
+                                    sx={{color: "whitesmoke"}}
+                                    />
+                                </IconButton>
 
-                        {/* navigation menu */}
-                        <Menu
-                            open={menuIsOpen}
-                            onClose={closeMenu}
-                            anchorEl={menuAnchorEl}
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "center",
-                            }}
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "center",
-                            }}
-                            sx={{
-                                display:"flex",
-                                justifyContent:"space-around"
-                            }}
-                        >
-                            <MenuItem>good</MenuItem>
-                            <MenuItem>stuff</MenuItem>
-                        </Menu>
+                                {/* navigation menu */}
+                                <Menu
+                                    open={menuIsOpen}
+                                    onClose={closeMenu}
+                                    anchorEl={menuAnchorEl}
+                                    anchorOrigin={{
+                                        vertical: "bottom",
+                                        horizontal: "center",
+                                    }}
+                                    transformOrigin={{
+                                        vertical: "top",
+                                        horizontal: "center",
+                                    }}
+                                    sx={{
+                                        flexDirection: "row",
+                                        justifyContent:"space-around"
+                                    }}
+                                >
+                                    <MenuItem>good</MenuItem>
+                                    <MenuItem>stuff</MenuItem>
+                                </Menu>
+                            </>                            
+                        ) : (
+                            <>
+                                <Box>
+                                    big screen content
+                                </Box>
+                            </>
+                        )}
                     </Box>
                 </AppBar>
             </Box>
